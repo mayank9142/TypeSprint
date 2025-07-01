@@ -60,6 +60,13 @@ h1, h3 {
   margin: 0;
 }
 
+.logo {
+  height:80px;
+  vertical-align: middle;
+  margin-left: 0px;
+  border-radius: 50px;
+}
+
 .text-display {
   background: #eee;
   padding: 15px;
@@ -145,16 +152,4 @@ button:hover {
     flex-direction: column;
     align-items: flex-start;
   }
-}
-.logo {
-    margin: 7px 0px 0px 0px;
-  height: 80px;
-  vertical-align: middle;
-  margin-left: 10px;
-  border-radius: 100px;
-}
-.logo {
-  max-height: 100%;
-  vertical-align: middle;
-  margin-left: 0px;
 }
