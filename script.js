@@ -1,4 +1,10 @@
-const sampleText = `Programming is a valuable skill in today's digital age. By learning to write code, you can create software, automate tasks, build websites, and even design games. It gives you problem-solving skills and logical thinking abilities. JavaScript, HTML, and CSS are core building blocks of modern web applications, allowing you to bring ideas to life.`;
+// two target texts
+const textMobile = `Programming is a valuable skill in today's digital world. Learning to code helps you think logically and solve problems efficiently, using creativity and technology together.`;
+
+const textDesktop = `Programming is an essential skill in today's rapidly evolving digital landscape. It empowers individuals to solve complex problems, automate repetitive tasks, and create powerful software solutions that transform industries. From web development with HTML, CSS, and JavaScript to artificial intelligence and data science, programming skills open endless opportunities. Learning to code improves logical thinking, attention to detail, and analytical skills, all of which are valuable across countless fields. With the ever-growing need for automation and digital transformation, coding knowledge equips you to build innovative applications, automate workflows, and even contribute to open-source communities. Practicing typing skills through applications like TypeSprint helps you develop speed and precision, essential for efficient programming. Whether you're just starting your journey or aiming to sharpen your skills, mastering programming is a smart investment in your future and a powerful tool for shaping the world around you.`;
+
+// pick text based on screen size
+const chosenText = window.innerWidth <= 768 ? textMobile : textDesktop;
 
 const textDisplay = document.getElementById("textDisplay");
 const inputArea = document.getElementById("inputArea");
@@ -10,9 +16,8 @@ const shareBtn = document.getElementById("share");
 const themeToggle = document.getElementById("themeToggle");
 const leaderboardList = document.getElementById("leaderboardList");
 
-// normalize quotes
-const cleanText = sampleText.replace(/’/g,"'").replace(/‘/g,"'");
-textDisplay.innerHTML = cleanText.split("").map(c => `<span>${c}</span>`).join("");
+// render spans
+textDisplay.innerHTML = chosenText.split("").map(c => `<span>${c}</span>`).join("");
 
 let startTime;
 let interval;
@@ -43,7 +48,7 @@ function calculateAccuracy() {
   const typed = inputArea.value;
   let correct = 0;
   for (let i=0; i<typed.length; i++) {
-    if (typed[i] === cleanText[i]) {
+    if (typed[i] === chosenText[i]) {
       correct++;
     }
   }
@@ -67,7 +72,7 @@ inputArea.addEventListener("input", () => {
   spans.forEach((span, i) => {
     if (typed[i] == null) {
       span.classList.remove("correct", "incorrect");
-    } else if (typed[i] === cleanText[i]) {
+    } else if (typed[i] === chosenText[i]) {
       span.classList.add("correct");
       span.classList.remove("incorrect");
     } else {
@@ -76,7 +81,7 @@ inputArea.addEventListener("input", () => {
     }
   });
 
-  if (typed === cleanText) {
+  if (typed === chosenText) {
     endTest();
   }
 });
@@ -100,7 +105,7 @@ shareBtn.addEventListener("click", () => {
   window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, "_blank");
 });
 
-// theme
+// theme toggle
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
   themeToggle.textContent = "☀️ Light Mode";
